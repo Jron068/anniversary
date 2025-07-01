@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anniversary 💌</title>
+    <style>
+        body {
+            background-color: #ffe6e6;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #ff4d4d;
+        }
+        #display {
+            font-size: 28px;
+            padding: 15px;
+            border: 2px solid #ff4d4d;
+            width: 240px;
+            margin: 20px auto;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 80px);
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background-color: #ff4d4d;
+            color: white;
+            font-size: 24px;
+            padding: 15px 0;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn:hover {
+            background-color: #cc0000;
+        }
+        .btn-wide {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🔐 Enter the 8-digit Code</h1>
+    
+
+    <div id="display">________</div>
+
+    <div class="keypad">
+        <button class="btn" onclick="appendDigit('1')">1</button>
+        <button class="btn" onclick="appendDigit('2')">2</button>
+        <button class="btn" onclick="appendDigit('3')">3</button>
+        <button class="btn" onclick="appendDigit('4')">4</button>
+        <button class="btn" onclick="appendDigit('5')">5</button>
+        <button class="btn" onclick="appendDigit('6')">6</button>
+        <button class="btn" onclick="appendDigit('7')">7</button>
+        <button class="btn" onclick="appendDigit('8')">8</button>
+        <button class="btn" onclick="appendDigit('9')">9</button>
+        <button class="btn" onclick="clearDisplay()">C</button>
+        <button class="btn" onclick="appendDigit('0')">0</button>
+        <button class="btn btn-wide" onclick="submitCode()">Enter</button>
+    </div>
+
+    <div id="responseMsg"></div>
+
+    <script>
+        const correctCode = "07112024"; // 🔐 Your secret 8-digit code
+        let inputCode = "";
+
+        function appendDigit(digit) {
+            if (inputCode.length < 8) {
+                inputCode += digit;
+                updateDisplay();
+            }
+        }
+
+        function clearDisplay() {
+            inputCode = "";
+            updateDisplay();
+            document.getElementById("responseMsg").innerHTML = "";
+        }
+
+        function updateDisplay() {
+            const masked = inputCode.padEnd(8, "_");
+            document.getElementById("display").textContent = masked;
+        }
+
+        function submitCode() {
+            const message = document.getElementById("responseMsg");
+            if (inputCode === correctCode) {
+                message.innerHTML = `<h3 style="color:green;">Happy Anniversary BOSS 💖</h3>`;
+                setTimeout(() => {
+                    window.location.href = "nextpage.html";
+                }, 1500);
+            } else {
+                message.innerHTML = `<h3 style="color:red;">Wrong code! Try again BOSS</h3>`;
+                clearDisplay();
+            }
+        }
+    </script>
+
+</body>
+</html>
